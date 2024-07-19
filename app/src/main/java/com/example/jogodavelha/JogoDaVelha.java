@@ -1,9 +1,11 @@
 package com.example.jogodavelha;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
@@ -48,9 +50,6 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
     private Intent intent;
     MediaPlayer somVitoria;
     Button btReiniciar;
-    CharSequence nomeCanal = "MeuCanal";
-    String descricao = "Descriçao";
-    int importancia = NotificationManager.IMPORTANCE_DEFAULT;
 
     private JogadorEntity primeiroJogador, segundoJogador;
 
@@ -65,21 +64,29 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
             return insets;
         });
 
-        NotificationChannel canal = new NotificationChannel("ID_CANAL", nomeCanal, importancia);
-        canal.setDescription(descricao);
-
-        NotificationManager gerenciador = getSystemService(NotificationManager.class);
-        gerenciador.createNotificationChannel(canal);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        criarCanalNotification();
         setComponents();
         setSensors();
         setListeners();
         getDataIntent();
         setMediaPlayer();
+    }
+
+    private void criarCanalNotification() {
+        CharSequence nomeCanal = "MeuCanal";
+        String descricao = "Descriçao";
+        int importancia = NotificationManager.IMPORTANCE_DEFAULT;
+
+        NotificationChannel canal = new NotificationChannel("ID_CANAL", nomeCanal, importancia);
+        canal.setDescription(descricao);
+
+        NotificationManager gerenciador = getSystemService(NotificationManager.class);
+        gerenciador.createNotificationChannel(canal);
     }
 
     private void setComponents() {
@@ -226,6 +233,9 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
 
         if (!existeVencedor) {
             rodada++;
+            if (rodada > 8) {
+                mostrarDialogoDeuVelha();
+            }
         } else {
             somVitoria.start();
         }
@@ -283,6 +293,21 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
                 declararVencedor(jogoVelha[2]);
             }
         }
+    }
+
+    private void mostrarDialogoDeuVelha() {
+        AlertDialog.Builder caixaDialogo = new AlertDialog.Builder(this);
+        caixaDialogo.setTitle("AH NAO! DEU VELHA!");
+        caixaDialogo.setIcon(android.R.drawable.ic_dialog_info);
+
+        caixaDialogo.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getApplicationContext(), "Então vamo mais uma", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        caixaDialogo.show();
     }
 
     private void zerarJogo() {
@@ -348,13 +373,13 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
 
     @SuppressLint("MissingPermission")
     private void mostrarNotificacao() {
-        NotificationCompat.Builder contruidor = new NotificationCompat.Builder(this, "ID_CANAL")
-                .setSmallIcon(android.R.drawable.star_on)
+        NotificationCompat.Builder construidor = new NotificationCompat.Builder(this, "ID_CANAL")
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setContentTitle("TITULO AQUI")
                 .setContentText("COnteudo")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat gerenciadorNotificacao = NotificationManagerCompat.from(this);
-        gerenciadorNotificacao.notify(1, contruidor.build());
+        gerenciadorNotificacao.notify(1, construidor.build());
     }
 }
