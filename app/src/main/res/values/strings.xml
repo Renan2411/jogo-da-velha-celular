@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Jogo-da-velha</string>
+    <string name="multiplayer">Multiplayer</string>
+    <string name="primeiroJogador">Nome primeiro Jogador</string>
+    <string name="segundoJogador">Nome segundo Jogador</string>
+    <string name="inicar">Iniciar Jogo</string>
+    <string name="opacaoX">Iniciar com X</string>
+    <string name="opacaoO">Iniciar com O</string>
+    <string name="escolhaOpcao">Escolher simbolo inicial</string>
+    <string name="reiniciar">Reiniciar</string>
+</resources>

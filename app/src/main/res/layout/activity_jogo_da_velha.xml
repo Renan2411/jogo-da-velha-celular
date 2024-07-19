@@ -1,0 +1,181 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JogoDaVelha">
+
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="271dp"
+        android:layout_height="269dp"
+        android:foregroundGravity="center_vertical"
+        app:columnCount="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rowCount="3">
+
+        <TextView
+            android:id="@+id/quadradoA"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+        <TextView
+            android:id="@+id/quadradoB"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+        <TextView
+            android:id="@+id/quadradoC"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+        <TextView
+            android:id="@+id/quadradoD"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+        <TextView
+            android:id="@+id/quadradoE"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+        <TextView
+            android:id="@+id/quadradoF"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+        <TextView
+            android:id="@+id/quadradoG"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+
+        <TextView
+            android:id="@+id/quadradoH"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+
+        <TextView
+            android:id="@+id/quadradoI"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:background="#A09797"
+            android:backgroundTint="#908A8A"
+            android:gravity="center"
+            android:textSize="60dp" />
+    </androidx.gridlayout.widget.GridLayout>
+
+    <EditText
+        android:id="@+id/pontosPrimeiroJogador"
+        android:layout_width="121dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="40dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toStartOf="@+id/pontosSegundoJogador"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/primeiroJogador"
+        app:layout_constraintVertical_bias="0.503" />
+
+    <TextView
+        android:id="@+id/primeiroJogador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Primeiro Jogador"
+        app:layout_constraintEnd_toStartOf="@+id/segundoJogador"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/segundoJogador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="48dp"
+        android:text="Segundo Jogador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/pontosSegundoJogador"
+        android:layout_width="121dp"
+        android:layout_height="45dp"
+        android:enabled="false"
+        android:layout_marginEnd="48dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/segundoJogador" />
+
+    <Button
+        android:id="@+id/btReiniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reiniciar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
