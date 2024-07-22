@@ -130,19 +130,19 @@
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toStartOf="@+id/pontosSegundoJogador"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/primeiroJogador"
-        app:layout_constraintVertical_bias="0.503" />
+        app:layout_constraintVertical_bias="0.41" />
 
     <TextView
         android:id="@+id/primeiroJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="128dp"
         android:text="Primeiro Jogador"
         app:layout_constraintEnd_toStartOf="@+id/segundoJogador"
-        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintHorizontal_bias="0.368"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -150,7 +150,7 @@
         android:id="@+id/segundoJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="48dp"
         android:text="Segundo Jogador"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,13 +160,14 @@
         android:id="@+id/pontosSegundoJogador"
         android:layout_width="121dp"
         android:layout_height="45dp"
-        android:enabled="false"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
+        android:enabled="false"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/segundoJogador" />
+        app:layout_constraintTop_toBottomOf="@+id/segundoJogador"
+        app:layout_constraintVertical_bias="0.41" />
 
     <Button
         android:id="@+id/btReiniciar"
@@ -175,7 +176,22 @@
         android:text="@string/reiniciar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.42" />
+
+    <TextView
+        android:id="@+id/tvTemporizador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01:00"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp"
+        app:layout_constraintVertical_bias="0.188" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

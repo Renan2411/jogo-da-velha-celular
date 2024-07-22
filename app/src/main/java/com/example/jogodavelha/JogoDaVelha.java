@@ -14,6 +14,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,13 +44,18 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
     private Integer pontosPrimeiroJogador = 0;
     private Integer pontosSegundoJogador = 0;
     private String[] jogoVelha = new String[9];
-    TextView quadradoA, quadradoB, quadradoC, quadradoD, quadradoE, quadradoF, quadradoG, quadradoH, quadradoI, nomePrimeiroJogador, nomeSegundoJogador;
+    TextView quadradoA, quadradoB, quadradoC, quadradoD, quadradoE, quadradoF, quadradoG, quadradoH, quadradoI;
+    TextView nomePrimeiroJogador, nomeSegundoJogador;
+    TextView tvTemporizador;
     EditText edPontosPrimeiroJogador, edPontosSegundoJogador;
     private SensorManager sensorManager;
     private Sensor sensorMovimento;
     private Intent intent;
     MediaPlayer somVitoria;
     Button btReiniciar;
+    int minutos = 10;
+    Handler handler;
+    Thread threadInicarTemporizador, threadFinalizarTemporizador;
 
     private JogadorEntity primeiroJogador, segundoJogador;
 
@@ -75,6 +81,8 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
         setListeners();
         getDataIntent();
         setMediaPlayer();
+        setThreads();
+        iniciarThreads();
     }
 
     private void criarCanalNotification() {
@@ -104,9 +112,12 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
 
         nomePrimeiroJogador = (TextView) findViewById(R.id.primeiroJogador);
         nomeSegundoJogador = (TextView) findViewById(R.id.segundoJogador);
+        tvTemporizador = (TextView) findViewById(R.id.tvTemporizador);
 
         edPontosPrimeiroJogador = (EditText) findViewById(R.id.pontosPrimeiroJogador);
         edPontosSegundoJogador = (EditText) findViewById(R.id.pontosSegundoJogador);
+
+        handler = new Handler();
     }
 
     private void setSensors() {
@@ -204,6 +215,55 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
 
     private void setMediaPlayer() {
         somVitoria = MediaPlayer.create(JogoDaVelha.this, R.raw.somvitoria);
+    }
+
+    private void setThreads() {
+        criarThreadInicarTemporizador();
+        criarThreadFinalizarTemporizador();
+    }
+
+    private void criarThreadInicarTemporizador() {
+        threadInicarTemporizador = new Thread() {
+            @Override
+            public void run() {
+
+                while (minutos > 0) {
+                    minutos--;
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvTemporizador.setText("00:" + minutos);
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        };
+    }
+
+    private void criarThreadFinalizarTemporizador() {
+        new Thread() {
+            @Override
+            public void run() {
+                while (threadInicarTemporizador.isAlive()) {
+                    if (minutos == 0) {
+                        zerarJogo();
+                    }
+                }
+
+            }
+        }.start();
+    }
+
+    private void iniciarThreads() {
+        threadInicarTemporizador.start();
+//        threadFinalizarTemporizador.start();
     }
 
     private void setNomeJogadores() {
@@ -326,6 +386,10 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
         quadradoG.setText("");
         quadradoH.setText("");
         quadradoI.setText("");
+
+        minutos = 30;
+
+//        iniciarThreads();
     }
 
     private Boolean verificarSeLinhaEstaPreenchida(String primeiroValor, String segundoValor, String terceiroValor) {
@@ -368,7 +432,6 @@ public class JogoDaVelha extends AppCompatActivity implements SensorEventListene
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     @SuppressLint("MissingPermission")
